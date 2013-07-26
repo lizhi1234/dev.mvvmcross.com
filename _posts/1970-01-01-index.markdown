@@ -1,0 +1,54 @@
+---
+layout: docs
+categories: docs
+title:  "The Manifesto"
+---
+
+The MvvmCross framework is opinionated in how you should write your code:
+
+<div class="row">
+  <div class="large-4 columns">
+    <dl>
+      <dt><h5>Portability</h5></dt>
+      <dd>Portable Class Libraries should be used for as much as your code as possibly can. Friends don’t let friends copy and paste, # is for twitter not code.</dd>
+    </dl>
+  </div>
+  <div class="large-4 columns">
+    <dl>
+      <dt><h5>Interface Driven Development</h5></dt>
+      <dd>Dependency Injection, Inversion of Control and Plugins used to get your applications richly and robustly to market using the same code base on all of your target platforms.</dd>
+    </dl>
+  </div>
+  <div class="large-4 columns">
+    <dl>
+      <dt><h5>Testability</h5></dt>
+      <dd>You should use interfaces and small, cohesive, loosely coupled components backed by unit tests to allow your code to be used, reshaped and reused again and again.</dd>
+    </dl>
+  </div>
+</div>
+
+<div class="row">
+  <div class="large-4 columns">
+    <dl>
+      <dt><h5>ModelView View Model</h5></dt>
+      <dd>Use the MvvM architectural pattern to provide a flexible structure for sustainable, flexible ongoing development of your application.</dd>
+    </dl>
+  </div>
+  <div class="large-4 columns">
+    <dl>
+      <dt><h5>Native User Interfaces</h5></dt>
+      <dd>Users love native applications and you should give them Native UIs that delight, that provide rich functionality and that are styled to fit naturally in the context of your users’ devices.</dd>
+    </dl>
+  </div>
+  <div class="large-4 columns">
+    <dl>
+      <dt><h5>Your Opinions Matter</h5></dt>
+      <dd>You should be able to override any part of MvvmCross, including it’s opinions.</dd>
+    </dl>
+  </div>
+</div>
+
+Lastly more than anything else your application is king, delivering is everything and all that matters is what you ship.
+
+![](/assets/TAiK.png)
+

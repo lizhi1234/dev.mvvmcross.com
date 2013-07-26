@@ -1,0 +1,71 @@
+---
+layout: docs
+categories: docs
+title: Tracing
+---
+
+
+MvvmCross DebugTrace is all routed via a singleton implementation of IMvxTrace
+
+Each platform provides different implementations of this:
+
+* Windows platforms use Debug trace (because Trace itself is not available on all the Windows platforms)
+* Android uses a dual log of both Debug and the Android log
+* iOS uses a dual log of both Debug and the iOS Console
+
+This worked well in earlier versions of MvvmCross, especially where people linked directly to the MvvmCross source code and so could bind directly to either the debug or release MvvmCross binaries.
+
+However... because people are now increasingly using the release Binaries from Nuget - in which Debug is of course compiled out, then this often leaves people asking "How to use it?"
+
+The easiest way is for you to override the initialisation of IMvxTrace in your Setup class:
+
+<div class="section-container tabs" data-section="tabs" data-options="deep_linking: false">
+  <div class="section">
+    <p class="title"><a href="#">App.cs</a></p>
+    <div class="content" data-slug="">
+
+{% highlight csharp %}
+protected override IMvxTrace CreateDebugTrace() { return new MyDebugTrace(); }
+{% endhighlight %}
+
+    </div>
+  </div>
+</div>
+
+<div class="section-container tabs" data-section="tabs" data-options="deep_linking: false">
+  <div class="section">
+    <p class="title"><a href="#">MyDebugTrace.cs</a></p>
+    <div class="content" data-slug="">
+
+{% highlight csharp %}
+public class MyDebugTrace : IMvxTrace
+{
+    public void Trace(MvxTraceLevel level, string tag, Func<string> message)
+    {
+        Debug.WriteLine(tag + ":" + level + ":" + message());
+    }
+
+    public void Trace(MvxTraceLevel level, string tag, string message)
+    {
+        Debug.WriteLine(tag + ":" + level + ":" + message);
+    }
+
+    public void Trace(MvxTraceLevel level, string tag, string message, params object[] args)
+    {
+        try
+        {
+            Debug.WriteLine(string.Format(tag + ":" + level + ":" + message, args));
+        }
+        catch (FormatException)
+        {
+            Trace(MvxTraceLevel.Error, tag, "Exception during trace of {0} {1} {2}", level, message);
+        }
+    }
+}
+{% endhighlight %}
+
+    </div>
+  </div>
+</div>
+
+If you wanted to include different implementations for debug/release; if you wanted to switch this on/off at runtime; if you wanted to filter on MvxTraceLevel or tag; or if you wanted to use some third party logging engine then this should also be easy to do using simple C# on each platform.
